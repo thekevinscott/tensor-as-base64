@@ -2,7 +2,7 @@
   "name": "tensor-as-base64",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": [
     "tensorflow.js"
   ],

@@ -30,3 +30,5 @@ export const tensorAsBase64 = async (tensor: tf.Tensor3D) => {
   ctx.putImageData(imageData, 0, 0);
   return canvas.toDataURL();
 };
+
+export default tensorAsBase64;
