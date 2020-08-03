@@ -3,7 +3,6 @@ import * as tf from '@tensorflow/tfjs';
 export const tensorAsBuffer = async (tensor: tf.Tensor3D) => {
   const [height, width] = tensor.shape;
   const buffer = new Uint8ClampedArray(width * height * 4);
-  const imageData = new ImageData(width, height);
   const data = await tensor.data();
   let i = 0;
   for (let y = 0; y < height; y++) {
@@ -16,13 +15,14 @@ export const tensorAsBuffer = async (tensor: tf.Tensor3D) => {
       i += 3;
     }
   }
-  imageData.data.set(buffer);
-  return imageData;
+  return buffer;
 };
 
 export const tensorAsBase64 = async (tensor: tf.Tensor3D) => {
   const [height, width] = tensor.shape;
-  const imageData = await tensorAsBuffer(tensor);
+  const buffer = await tensorAsBuffer(tensor);
+  const imageData = new ImageData(width, height);
+  imageData.data.set(buffer);
   const canvas = document.createElement('canvas');
   canvas.width = width;
   canvas.height = height;
